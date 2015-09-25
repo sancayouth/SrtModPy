@@ -9,15 +9,15 @@ class SrtMod:
     content = []
     content_aux = []
 
-    def __init__(self, filename, cant=0, time_part='S', operation='/A'):
+    def __init__(self, filename, time_amount=0, time_part='S', operation='/A'):
         self._file = filename
-        self._cant = cant
-        self._time_part = time_part.upper()
-        self._operation = operation.upper()
-        if self._time_part == 'M':
-            self._cant *= 60
-        if self._operation == '/D' and self._cant > 0:
-            self._cant *= -1
+        self.time_amount = time_amount
+        self.time_part = time_part.upper()
+        self.operation = operation.upper()
+        if self.time_part == 'M':
+            self.time_amount *= 60
+        if self.operation == '/D' and self.time_amount > 0:
+            self.time_amount *= -1
 
     def check_file_extension(self):
         ext = os.path.splitext(self._file)[1]
@@ -29,7 +29,7 @@ class SrtMod:
     def mod_time(self, g_time):
         a = datetime(1, 1, 1, int(g_time.group(1)), int(g_time.group(2)),
              int(g_time.group(3)))
-        b = a + timedelta(seconds=self._cant)
+        b = a + timedelta(seconds=self.time_amount)
         micrseg = g_time.group(4)
         return  str(b.hour).zfill(2) + ':' + str(b.minute).zfill(2) + \
                       ':' + str(b.second).zfill(2) + ',' + micrseg
@@ -46,14 +46,15 @@ class SrtMod:
         return line
 
     def save_to_file(self):
-        outputf = open('foo.srt', 'w')
+        name = os.path.splitext(self._file)[0] + '(modified).srt'
+        outputf = open(name, 'w')
         outputf.writelines(self.content_aux)
         outputf.close()
 
     def process(self):
         result = False
         if self.check_file_extension() and self.file_exist():
-            with open('sub.srt', 'r') as f:
+            with open(self._file, 'r') as f:
                 self.content = f.readlines()
             for line in self.content:
                 self.content_aux.append(self.mod_line(line))
