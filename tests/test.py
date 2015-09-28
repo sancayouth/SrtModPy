@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 import re
-from srtmod import SrtMod
+from srtmod.srtmod import SrtMod
 
 
 class Tests(unittest.TestCase):
