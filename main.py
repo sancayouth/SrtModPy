@@ -1,5 +1,5 @@
 import os.path
-from srtmod import srtmod
+from srtmod.srtmod import SrtMod
 import argparse
 
 
@@ -12,14 +12,14 @@ def main():
     parser.add_argument('time_part',
            help='it\'s the part of time to be modified', choices=['S', 'M'])
     parser.add_argument('operation',
-           help='add or dicount time to subtitle', choices=['/A', '/D'])
+           help='add or discount time to subtitle', choices=['/A', '/D'])
     r = parser.parse_args()
     time_amount = r.time_amount
     file_name = r.file_name
     time_part = r.time_part
     operation = r.operation
     try:
-        srt = srtmod.SrtMod(file_name, time_amount, time_part, operation)
+        srt = SrtMod(file_name, time_amount, time_part, operation)
         if srt.process():
             print '\nsubtitle file was created successfully'
             print 'file saved at :' + os.path.splitext(file_name)[0] \
