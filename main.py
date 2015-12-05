@@ -7,7 +7,7 @@ def main():
     parser = argparse.ArgumentParser(prog='SrtModPy',
             description='Just adjusts the timing of subtitle files')
     parser.add_argument('file_name', help='the subtitle to be modified')
-    parser.add_argument('time_amount', metavar='time_amount', type=int,
+    parser.add_argument('time_amount', metavar='time_amount', type=float,
            help='the amount of time to be added or subtracted to subtitle')
     parser.add_argument('time_part',
            help='it\'s the part of time to be modified', choices=['S', 'M'])
@@ -21,7 +21,7 @@ def main():
     try:
         srt = SrtMod(file_name, time_amount, time_part, operation)
         if srt.process():
-            print '\nsubtitle file was created successfully'
+            print 'subtitle file was created successfully'
             print 'file saved at :' + os.path.splitext(file_name)[0] \
                   + '(modified).srt'
         else:
