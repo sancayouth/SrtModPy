@@ -4,7 +4,7 @@ import re
 from datetime import timedelta, datetime
 
 
-class SrtMod:
+class SrtMod(object):
 
     content = []
     content_aux = []
@@ -27,7 +27,7 @@ class SrtMod:
         return os.path.exists(self._file)
 
     def mod_time(self, g_time):
-        a = datetime(1, 1, 1, int(g_time.group(1)), int(g_time.group(2)),
+        a = datetime(1, 1, 1, int(g_time.group(1)), int(g_time.group(2)),\
              int(g_time.group(3)))
         b = a + timedelta(seconds=self.time_amount)
         micrseg = g_time.group(4)
