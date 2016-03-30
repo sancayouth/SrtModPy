@@ -22,9 +22,8 @@ def main():
     try:
         srt = SrtMod(file_, time_amount, time_part, operation)
         if srt.process():
-            print 'subtitle file was created successfully'
-            print 'file saved at: ' + os.path.splitext(file)[0] \
-                  + '(modified).srt'
+			print 'subtitle file was created successfully'
+			print 'file saved at: ' + os.path.splitext(file_)[0] +'(modified).srt'
         else:
             print '\nsubtitle can not be processed'
     except OverflowError:
