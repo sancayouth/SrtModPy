@@ -9,14 +9,14 @@ class SrtMod(object):
     content = []
     content_aux = []
 
-    def __init__(self, filename, time_amount=0, time_part='S', operation='/A'):
+    def __init__(self, filename, time_amount=0, time_part='S', operation='A'):
         self._file = filename
         self.time_amount = time_amount
         self.time_part = time_part.upper()
         self.operation = operation.upper()
         if self.time_part == 'M':
             self.time_amount *= 60
-        if self.operation == '/D' and self.time_amount > 0:
+        if self.operation == 'D' and self.time_amount > 0:
             self.time_amount *= -1
 
     def check_file_extension(self):

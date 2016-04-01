@@ -12,7 +12,7 @@ def main():
     parser.add_argument('-t',\
            help='it\'s the part of time to be modified', choices=['S', 'M'], default='S')
     parser.add_argument('-o',\
-           help='add or discount time to subtitle', choices=['/A', '/D'], default='/A')
+           help='add or discount time to subtitle', choices=['A', 'D'], default='A')
     arg = parser.parse_args()
 
     time_amount = arg.time_amount
