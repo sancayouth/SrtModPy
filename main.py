@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os.path
 import argparse
 from srtmod.srtmod import SrtMod
@@ -20,12 +21,12 @@ def main():
     time_part = arg.t
     operation = arg.o
     try:
-        srt = SrtMod(file_, time_amount, time_part, operation)
-        if srt.process():
-			print 'subtitle file was created successfully'
-			print 'file saved at: ' + os.path.splitext(file_)[0] +'(modified).srt'
-        else:
-            print '\nsubtitle can not be processed'
+       srt = SrtMod(file_, time_amount, time_part, operation)
+       if srt.process():
+           print 'subtitle file was created successfully'
+           print 'file saved at: %s (modified).srt' % os.path.splitext(file_)[0]
+       else:
+           print '\nsubtitle can not be processed'
     except OverflowError:
         print 'Exception: Invalid time amount for this operation'
 

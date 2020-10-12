@@ -20,8 +20,7 @@ class SrtMod(object):
             self.time_amount *= -1
 
     def check_file_extension(self):
-        ext = os.path.splitext(self._file)[1]
-        return ext == '.srt'
+        return '.srt' in os.path.splitext(self._file)[1]
 
     def file_exist(self):
         return os.path.exists(self._file)
@@ -32,7 +31,7 @@ class SrtMod(object):
         b = a + timedelta(seconds=self.time_amount)
         micrseg = g_time.group(4)
         return '%s:%s:%s,%s' % ( str(b.hour).zfill(2), str(b.minute).zfill(2),
-                str(b.second).zfill(2), micrseg, )        
+                str(b.second).zfill(2), micrseg, )
 
     def mod_line(self, line):
         mat = re.match(r'(\d[\S.]+) --> ([\S.]+)', line)
@@ -46,9 +45,9 @@ class SrtMod(object):
         return line
 
     def save_to_file(self):
-        name = os.path.splitext(self._file)[0] + '(modified).srt'        
+        name = os.path.splitext(self._file)[0] + '(modified).srt'
         with open(name, 'w') as f:
-            f.writelines(self.content_aux)        
+            f.writelines(self.content_aux)
 
     def process(self):
         result = False
