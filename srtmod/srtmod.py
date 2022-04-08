@@ -7,7 +7,6 @@ from datetime import timedelta, datetime
 class SrtMod(object):
 
     content = []
-    content_aux = []
 
     def __init__(self, filename, time_amount=0, time_part='S', operation='A'):
         self._file = filename
@@ -38,24 +37,20 @@ class SrtMod(object):
         if mat:
             expression = r'(\d+):(\d+):(\d+),(\d{3})'
             begin = re.match(expression, mat.group(1))
-            res1 = self.mod_time(begin)
             end = re.match(expression, mat.group(2))
-            res2 = self.mod_time(end)
-            line = res1 + ' --> ' + res2 + '\n'
+            line = f'{self.mod_time(begin)} --> {self.mod_time(end)}\n'
         return line
 
     def save_to_file(self):
         name = os.path.splitext(self._file)[0] + '(modified).srt'
         with open(name, 'w') as f:
-            f.writelines(self.content_aux)
+            f.writelines(self.content)
 
     def process(self):
         result = False
         if self.check_file_extension() and self.file_exist():
             with open(self._file, 'r') as f:
-                self.content = f.readlines()
-            for line in self.content:
-                self.content_aux.append(self.mod_line(line))
+                self.content = [ self.mod_line(line) for line in f.readlines() ]
             self.save_to_file()
             result = True
         return result

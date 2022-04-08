@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import unittest
 import re
+import unittest
 from srtmod.srtmod import SrtMod
 
 
@@ -20,11 +20,6 @@ class Tests(unittest.TestCase):
         srt = SrtMod('sub.srt')
         result = srt.file_exist()
         self.assertTrue(result)
-
-    def test_when_file_is_load_content_must_be_greater_than_zero(self):
-        srt = SrtMod('sub.srt')
-        srt.process()
-        self.assertGreater(len(srt.content), 0)
 
     def test_increment_fiften_seconds_to_time(self):
         srt = SrtMod('sub.srt', 15)
@@ -99,6 +94,3 @@ class Tests(unittest.TestCase):
         srt = SrtMod('sub.srt', 1, 's', 'a')
         result = srt.process()
         self.assertTrue(result)
-
-    def test_decrement_to_negative_time_line(self):
-        pass
