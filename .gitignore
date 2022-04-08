@@ -1,1 +1,3 @@
 *.pyc
+# misc
+.DS_Store
