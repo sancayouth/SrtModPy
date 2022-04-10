@@ -14,11 +14,9 @@ class SrtMod(object):
     operation: str = field(default='')
 
     def __post_init__(self) -> None:
-        self.time_part = self.time_part.upper()
-        self.operation = self.operation.upper()
-        if self.time_part == 'M':
+        if self.time_part.upper() == 'M':
             self.time_amount *= 60
-        if self.operation == 'D' and self.time_amount > 0:
+        if self.operation.upper() == 'D' and self.time_amount > 0:
             self.time_amount *= -1
 
     def check_file_extension(self) -> bool:
